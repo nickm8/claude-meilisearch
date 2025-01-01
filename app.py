@@ -10,7 +10,7 @@ import sys
 
 # Configure logging
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
         logging.FileHandler('app.log'),
@@ -82,7 +82,7 @@ async def collect_chat_data(request: Request):
     conn = None
     try:
         # Log incoming request
-        logger.info("Received /collect request")
+        logger.debug("Received /collect request")
         
         # Get raw JSON data
         raw_data = await request.body()
@@ -110,7 +110,7 @@ async def collect_chat_data(request: Request):
         json_filename = f"{uuid}.json"
         json_path = os.path.join(JSON_DIR, json_filename)
         
-        logger.info(f"Saving JSON to {json_path}")
+        logger.debug(f"Saving JSON to {json_path}")
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         
@@ -122,7 +122,7 @@ async def collect_chat_data(request: Request):
         conn = init_db()
         
         # Insert into DuckDB
-        logger.info("Inserting data into DuckDB")
+        logger.debug("Inserting data into DuckDB")
         conn.execute("""
             INSERT INTO chat_data (uuid, collected_at, json_path, chat_data, 
                                  model_name, conversation_length, 
@@ -163,7 +163,7 @@ async def search_chats(
 ):
     conn = None
     try:
-        logger.info(f"Search request - query: {query}, model: {model}, min_length: {min_length}")
+        logger.debug(f"Search request - query: {query}, model: {model}, min_length: {min_length}")
         conn = init_db()
         
         conditions = []
@@ -220,7 +220,7 @@ async def search_chats(
 async def get_chat(uuid: str):
     conn = None
     try:
-        logger.info(f"Fetching chat with UUID: {uuid}")
+        logger.debug(f"Fetching chat with UUID: {uuid}")
         conn = init_db()
         
         result = conn.execute(
@@ -251,6 +251,6 @@ async def health_check():
     return {"status": "healthy", "timestamp": datetime.utcnow().isoformat()}
 
 if __name__ == "__main__":
-    logger.info("Starting application")
+    logger.debug("Starting application")
     import uvicorn
     uvicorn.run(app, host="localhost", port=8000)
