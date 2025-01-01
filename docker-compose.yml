@@ -26,6 +26,9 @@ services:
       - SERVICE_TYPE=api
       - MEILI_URL=http://meilisearch:7700
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-masterKey123}
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./raw_json:/app/raw_json
     depends_on:
       meilisearch:
         condition: service_healthy
@@ -40,6 +43,7 @@ services:
       - MEILI_URL=http://meilisearch:7700
       - MEILI_MASTER_KEY=${MEILI_MASTER_KEY:-masterKey123}
       - DATA_DIR=/app/raw_json
+      - PYTHONUNBUFFERED=1
     depends_on:
       meilisearch:
         condition: service_healthy

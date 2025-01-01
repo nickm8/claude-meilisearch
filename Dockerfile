@@ -21,6 +21,9 @@ COPY . .
 # Create directories for data persistence
 RUN mkdir -p raw_json
 
+# Add environment variable for Python logging
+ENV PYTHONUNBUFFERED=1
+
 # Expose port
 EXPOSE 8000
 
