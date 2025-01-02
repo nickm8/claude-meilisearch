@@ -7,6 +7,7 @@
 // @match        https://claude.ai/chat/*
 // @grant        none
 // @run-at       document-start
+// @license      MIT
 // ==/UserScript==
 
 (function() {

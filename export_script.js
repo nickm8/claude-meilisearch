@@ -8,6 +8,7 @@
 // @grant        GM.xmlHttpRequest
 // @grant        GM_xmlhttpRequest
 // @run-at       document-start
+// @license      MIT
 // ==/UserScript==
 
 (function() {
