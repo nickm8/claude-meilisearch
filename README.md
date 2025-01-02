@@ -11,8 +11,8 @@ Just to make it easier to search on conversation data from Claude.
 ### Setup  
 1. Clone this repository:  
    ```bash  
-   git clone https://github.com/nickm8/claude-meilsearch.git  
-   cd claude-meilsearch  
+   git clone https://github.com/nickm8/claude-meilisearch.git  
+   cd claude-meilisearch  
    ```  
 
 2. Start the services:  
